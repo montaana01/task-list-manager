@@ -1,4 +1,4 @@
-import {useMemo, useState} from 'react';
+import { useMemo, useState } from 'react';
 import {
   Table,
   Button,
@@ -11,14 +11,14 @@ import {
   Popconfirm,
   message,
 } from 'antd';
-import {EditOutlined, DeleteOutlined} from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '@ant-design/v5-patch-for-react-19';
 import dayjs from 'dayjs';
-import type {ColumnsType} from 'antd/es/table';
-import type {RowItem} from '@/types';
-import {table, state} from '@/constants';
-import {Container} from '@/components/Container';
-import {SearchInput} from '@/components/SearchInput';
+import type { ColumnsType } from 'antd/es/table';
+import type { RowItem } from '@/types';
+import { table, state } from '@/constants';
+import { Container } from '@/components/Container';
+import { SearchInput } from '@/components/SearchInput';
 
 export const UserForm = () => {
   const [data, setData] = useState<RowItem[]>(() => table.defaultRowItems);
@@ -30,7 +30,7 @@ export const UserForm = () => {
   const [search, setSearch] = useState(state.search);
 
   const nextId = useMemo(() => {
-    return Math.max(0, ...data.map(item => item.id)) + 1;
+    return Math.max(0, ...data.map((item) => item.id)) + 1;
   }, [data]);
 
   const addRowItem = () => {
@@ -66,17 +66,19 @@ export const UserForm = () => {
       };
 
       if (editingId === null) {
-        setData((previousItems) => [{id: nextId, ...payload}, ...previousItems]);
+        setData((previousItems) => [{ id: nextId, ...payload }, ...previousItems]);
         message.success(table.modalAlerts.add);
       } else {
-        setData((previousItems) => previousItems.map((item) => (item.id === editingId ? {...item, ...payload} : item)));
+        setData((previousItems) =>
+          previousItems.map((item) => (item.id === editingId ? { ...item, ...payload } : item)),
+        );
         message.success(table.modalAlerts.update);
       }
       setIsModalOpen(false);
       form.resetFields();
-    } catch (err) {
+    } catch (error) {
       message.error(table.modalAlerts.error);
-      console.error(err);
+      console.error(error);
     }
   };
 
@@ -88,11 +90,11 @@ export const UserForm = () => {
   const filteredData = useMemo(() => {
     if (!search) return data;
     return data.filter((row) => {
-      const dateStr = row.date ? row.date.toLocaleDateString() : '';
+      const dateString = row.date ? row.date.toLocaleDateString() : '';
       return (
         String(row.title).toLowerCase().includes(search) ||
         String(row.weight).toLowerCase().includes(search) ||
-        dateStr.toLowerCase().includes(search)
+        dateString.toLowerCase().includes(search)
       );
     });
   }, [data, search]);
@@ -131,23 +133,22 @@ export const UserForm = () => {
       title: table.tableRowsTitle.date,
       dataIndex: 'date',
       key: 'date',
-      sorter: (a: RowItem, b: RowItem) =>
-        new Date(a.date).getTime() - new Date(b.date).getTime(),
-      render: (value: Date) => value ? value.toLocaleDateString() : '',
+      sorter: (a: RowItem, b: RowItem) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+      render: (value: Date) => (value ? value.toLocaleDateString() : ''),
     },
     {
       title: table.tableRowsTitle.action,
       key: 'actions',
-      render: (_: any, record: RowItem) => (
+      render: (_, record: RowItem) => (
         <Space>
-          <Button icon={<EditOutlined/>} onClick={() => editRowItem(record)}/>
+          <Button icon={<EditOutlined />} onClick={() => editRowItem(record)} />
           <Popconfirm
             title={table.buttonTitles.delete}
             onConfirm={() => {
               handleDeleteRowItem(record.id);
             }}
           >
-            <Button icon={<DeleteOutlined/>}/>
+            <Button icon={<DeleteOutlined />} />
           </Popconfirm>
         </Space>
       ),
@@ -157,14 +158,14 @@ export const UserForm = () => {
   return (
     <Container>
       <div className={'table'}>
-        <SearchInput addRowItem={addRowItem} setSearch={setSearch}/>
+        <SearchInput addRowItem={addRowItem} setSearch={setSearch} />
 
         <Table<RowItem>
           className={'table_wrapper'}
           columns={columns}
           dataSource={filteredData}
           rowKey="id"
-          pagination={{pageSize: 6}}
+          pagination={{ pageSize: 6 }}
           bordered
           showSorterTooltip={true}
         />
@@ -180,32 +181,38 @@ export const UserForm = () => {
             <Form.Item
               name="title"
               label={table.tableRowsTitle.title}
-              rules={[{required: true, message: table.modalTitles.formTitles.title}, {max: 100}]}
+              rules={[
+                { required: true, message: table.modalTitles.formTitles.title },
+                { max: 100 },
+              ]}
             >
-              <Input/>
+              <Input />
             </Form.Item>
             <Form.Item
               name="description"
               label={table.tableRowsTitle.description}
-              rules={[{required: true, message: table.modalTitles.formTitles.description}, {max: 100}]}
+              rules={[
+                { required: true, message: table.modalTitles.formTitles.description },
+                { max: 100 },
+              ]}
             >
-              <Input/>
+              <Input />
             </Form.Item>
 
             <Form.Item
               name="weight"
               label={table.tableRowsTitle.weight}
-              rules={[{required: true, message: table.modalTitles.formTitles.weight}]}
+              rules={[{ required: true, message: table.modalTitles.formTitles.weight }]}
             >
-              <InputNumber style={{width: '100%'}} min={-999999999}/>
+              <InputNumber style={{ width: '100%' }} min={-999999999} />
             </Form.Item>
 
             <Form.Item
               name="date"
               label={table.tableRowsTitle.date}
-              rules={[{required: true, message: table.modalTitles.formTitles.date}]}
+              rules={[{ required: true, message: table.modalTitles.formTitles.date }]}
             >
-              <DatePicker style={{width: '100%'}}/>
+              <DatePicker style={{ width: '100%' }} />
             </Form.Item>
           </Form>
         </Modal>

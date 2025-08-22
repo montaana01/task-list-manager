@@ -41,7 +41,7 @@ export const table = {
       description: 'Enter the description',
       weight: 'Choose a weight',
       date: 'Select a date',
-    }
+    },
   },
   defaultRowItems: [
     {
@@ -56,7 +56,7 @@ export const table = {
       title: 'Test row #2',
       description: 'This is default description for row #2',
       weight: 42,
-      date: new Date(Date.now() - 86400000 * 5),
+      date: new Date(Date.now() - 1),
     },
   ],
 };

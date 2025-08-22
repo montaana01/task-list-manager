@@ -5,3 +5,8 @@ export type RowItem = {
   weight: number;
   date: Date;
 };
+
+export type SearchInputProps = {
+  addRowItem: VoidFunction;
+  setSearch: (value: string) => void;
+};

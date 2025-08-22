@@ -3,17 +3,15 @@ import { state, table } from '@/constants';
 import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import debounce from 'lodash/debounce';
+import type { SearchInputProps } from '@/types';
 
-export type SearchInputProps = {
-  addRowItem: VoidFunction;
-  setSearch: (val: string) => void;
-};
+const delay = 250;
 
 export const SearchInput = ({ addRowItem, setSearch }: SearchInputProps) => {
   const [searchQuery, setSearchQuery] = useState(state.searchQuery);
 
   useEffect(() => {
-    const debounced = debounce((value: string) => setSearch(value.trim().toLowerCase()), 250);
+    const debounced = debounce((value: string) => setSearch(value.trim().toLowerCase()), delay);
     debounced(searchQuery);
     return () => debounced.cancel();
   }, [searchQuery]);

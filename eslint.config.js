@@ -8,7 +8,7 @@ import eslintPluginPrettier from 'eslint-plugin-prettier';
 import prettierConfig from 'eslint-config-prettier';
 
 export default tslint.config(
-  {ignores: ['node_modules', 'dist']},
+  { ignores: ['node_modules', 'dist'] },
   {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
@@ -31,16 +31,16 @@ export default tslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': ['warn', {allowConstantExport: true}],
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       'no-alert': 'error',
       'no-console': 'warn',
       'no-duplicate-imports': 'error',
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
-      '@typescript-eslint/consistent-type-assertions': ['error', {assertionStyle: 'never'}],
+      '@typescript-eslint/consistent-type-assertions': ['error', { assertionStyle: 'never' }],
       '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/explicit-member-accessibility': [
         'error',
-        {accessibility: 'explicit', overrides: {constructors: 'off'}},
+        { accessibility: 'explicit', overrides: { constructors: 'off' } },
       ],
       '@typescript-eslint/member-ordering': 'error',
       'no-magic-numbers': 'off',
@@ -87,5 +87,5 @@ export default tslint.config(
   {
     files: ['**/*.{ts,tsx}'],
     extends: [prettierConfig],
-  }
+  },
 );
