@@ -2,32 +2,27 @@ import js from '@eslint/js';
 import globals from 'globals';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
-import tseslint from 'typescript-eslint';
 import tslint from 'typescript-eslint';
 import unicornPlugin from 'eslint-plugin-unicorn';
 import eslintPluginPrettier from 'eslint-plugin-prettier';
 import prettierConfig from 'eslint-config-prettier';
-import { globalIgnores } from 'eslint/config';
 
-export default tseslint.config([
-  globalIgnores(['dist']),
+export default tslint.config(
+  {ignores: ['node_modules', 'dist']},
   {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
-      ecmaVersion: 2020,
+      ecmaVersion: 'latest',
       globals: globals.browser,
     },
     extends: [
       js.configs.recommended,
       ...tslint.configs.recommended,
       unicornPlugin.configs.recommended,
-      tseslint.configs.recommended,
       reactHooks.configs['recommended-latest'],
       reactRefresh.configs.vite,
     ],
     plugins: {
-      'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
       prettier: eslintPluginPrettier,
     },
     linterOptions: {
@@ -36,16 +31,16 @@ export default tseslint.config([
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+      'react-refresh/only-export-components': ['warn', {allowConstantExport: true}],
       'no-alert': 'error',
       'no-console': 'warn',
       'no-duplicate-imports': 'error',
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
-      '@typescript-eslint/consistent-type-assertions': ['error', { assertionStyle: 'never' }],
+      '@typescript-eslint/consistent-type-assertions': ['error', {assertionStyle: 'never'}],
       '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/explicit-member-accessibility': [
         'error',
-        { accessibility: 'explicit', overrides: { constructors: 'off' } },
+        {accessibility: 'explicit', overrides: {constructors: 'off'}},
       ],
       '@typescript-eslint/member-ordering': 'error',
       'no-magic-numbers': 'off',
@@ -89,5 +84,8 @@ export default tseslint.config([
       'prettier/prettier': 'error',
     },
   },
-  prettierConfig,
-]);
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [prettierConfig],
+  }
+);
