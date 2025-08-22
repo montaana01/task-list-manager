@@ -10,9 +10,52 @@
   &_search {
     justify-content: center;
     width: 100%;
+    &_input {
+      width: 100%;
+    }
   }
 
   &_wrapper {
     width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .ant-table {
+    font-size: 12px;
+
+    .ant-table-thead > tr > th,
+    .ant-table-tbody > tr > td {
+      padding: 8px;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .ant-table {
+    .ant-table-cell > div {
+      display: flex;
+      flex-direction: column;
+    }
+    .ant-table-thead > tr > th,
+    .ant-table-tbody > tr > td {
+      padding: 4px;
+    }
+  }
+}
+
+@media (max-width: 380px) {
+  .ant-table {
+    .ant-table-thead > tr > th {
+      writing-mode: vertical-lr;
+      text-align: center;
+      & > div {
+        flex-direction: row;
+        justify-content: center;
+      }
+    }
+    .ant-table-thead > tr > th,
+    .ant-table-tbody > tr > td {
+      padding: 1px;
+    }
   }
 }

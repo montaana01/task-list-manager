@@ -24,7 +24,7 @@ export const SearchInput = ({ addRowItem, setSearch }: SearchInputProps) => {
         allowClear
         value={searchQuery}
         onChange={(event) => setSearchQuery(event.target.value)}
-        style={{ width: 300 }}
+        className={'table_search_input'}
       />
       <Button type="primary" icon={<PlusOutlined />} onClick={addRowItem}>
         {table.buttonTitles.add}
