@@ -1,3 +1,5 @@
+@use 'variables';
+
 :root {
   --main-color: #f7f1df;
   --second-color: #2d2d2d;
@@ -52,7 +54,8 @@ body {
 }
 
 main {
-  padding: 30px 0;
+  width: 100%;
+  min-height: variables.$main-height;
 }
 
 .container {

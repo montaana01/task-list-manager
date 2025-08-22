@@ -1,3 +1,5 @@
+@use '../base/variables';
+
 .header {
   width: 100%;
 
@@ -5,7 +7,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 4rem;
+    height: variables.$header-height;
   }
 
   &_img {
