@@ -92,7 +92,9 @@ export const UserForm = () => {
     return data.filter((row) => {
       const dateString = row.date ? row.date.toLocaleDateString() : '';
       return (
+        String(row.id).toLowerCase().includes(search) ||
         String(row.title).toLowerCase().includes(search) ||
+        String(row.description).toLowerCase().includes(search) ||
         String(row.weight).toLowerCase().includes(search) ||
         dateString.toLowerCase().includes(search)
       );
