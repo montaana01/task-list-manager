@@ -14,6 +14,7 @@
     "stylelint:fix": "stylelint \"**/*.scss\" --fix"
   },
   "dependencies": {
+    "@ant-design/v5-patch-for-react-19": "^1.0.3",
     "@types/node": "^24.3.0",
     "antd": "^5.27.1",
     "lodash": "^4.17.21",
